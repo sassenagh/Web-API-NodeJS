@@ -25,6 +25,7 @@ const {
 const {
   HomeRoutes,
   ClientRoutes,
+  PolicyRoutes,
   AuthRoutes,
 } = require ('../routes/index.routes');
 const Routes = require ('../routes');
@@ -56,6 +57,7 @@ container
   .register ({
     HomeRoutes: asFunction (HomeRoutes).singleton (),
     ClientRoutes: asFunction (ClientRoutes).singleton (),
+    PolicyRoutes: asFunction (PolicyRoutes).singleton (),
     AuthRoutes: asFunction (AuthRoutes).singleton (),
   })
   .register ({

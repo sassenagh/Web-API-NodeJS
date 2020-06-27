@@ -5,7 +5,7 @@ module.exports = function({ClientController}) {
   const router = Router ();
 
   router.get ('/', ClientController.getAll);
-  router.get ('/client', AuthMiddleware, ClientController.get);
+  router.get ('/filter', AuthMiddleware, ClientController.get);
 
   return router;
 };

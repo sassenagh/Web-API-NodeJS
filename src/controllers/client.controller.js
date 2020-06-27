@@ -15,6 +15,7 @@ class ClientController {
       const user = await _clientService.getClientByUserId (id);
       return res.send (user);
     }
+    return res.status (400).send ({status: 400, message: 'Bad Request'});
   }
 
   async getAll (req, res) {

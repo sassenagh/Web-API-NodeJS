@@ -1,11 +1,16 @@
-const {Router} = require ('express');
-const {AuthMiddleware} = require ('../middlewares');
+const { Router } = require('express');
+const { AuthMiddleware, CacheMiddleware } = require('../middlewares');
+const { CACHE_TIME } = require('../helpers');
 
-module.exports = function({ClientController}) {
-  const router = Router ();
+module.exports = function ({ ClientController }) {
+  const router = Router();
 
-  router.get ('/', ClientController.getAll);
-  router.get ('/filter', AuthMiddleware, ClientController.get);
+  router.get('/', ClientController.getAll);
+  router.get(
+    '/filter',
+    [AuthMiddleware, CacheMiddleware(CACHE_TIME.ONE_HOUR)],
+    ClientController.get
+  );
 
   return router;
 };

@@ -1,6 +1,7 @@
 module.exports = {
-  NotFoundMiddleware: require ('./not-found.middleware'),
-  ErrorMiddleware: require ('./error.middleware'),
-  AuthMiddleware: require ('./auth.middleware'),
-  RoleMiddleware: require ('./role.middleware'),
+  NotFoundMiddleware: require('./not-found.middleware'),
+  ErrorMiddleware: require('./error.middleware'),
+  AuthMiddleware: require('./auth.middleware'),
+  RoleMiddleware: require('./role.middleware'),
+  CacheMiddleware: require('./cache.middleware'),
 };

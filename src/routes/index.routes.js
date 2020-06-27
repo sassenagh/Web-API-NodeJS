@@ -1,4 +1,5 @@
 module.exports = {
-  HomeRoutes: require("./home.routes"),
-  ClientRoutes: require("./client.routes"),
+  HomeRoutes: require ('./home.routes'),
+  ClientRoutes: require ('./client.routes'),
+  AuthRoutes: require ('./auth.routes'),
 };

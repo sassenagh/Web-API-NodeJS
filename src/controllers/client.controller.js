@@ -6,13 +6,13 @@ class ClientController {
   }
 
   async get (req, res) {
-    const {clientId, name} = req.params;
+    const {id, name} = req.query;
 
     if (name) {
       const user = await _clientService.getClientByUsername (name);
       return res.send (user);
-    } else if (clientId) {
-      const user = await _clientService.getClientByUserId (clientId);
+    } else if (id) {
+      const user = await _clientService.getClientByUserId (id);
       return res.send (user);
     }
   }

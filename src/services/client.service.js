@@ -18,10 +18,16 @@ class ClientService {
     return users.find (user => user.id === id);
   }
 
-  async getClientByUsername (username) {
+  async getClientByUsername (name) {
     const users = await this.getUsers ();
 
-    return users.find (user => user.name === username);
+    return users.find (user => user.name === name);
+  }
+
+  async getClientByEmail (email) {
+    const users = await this.getUsers ();
+
+    return users.find (user => user.email === email);
   }
 }
 

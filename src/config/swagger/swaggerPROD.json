@@ -1,0 +1,223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Backend ::Wep-api:: App",
+    "version": "1.0.0",
+    "title": "Swagger Web-api",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "clients",
+      "description": "Client Requests"
+    },
+    {
+      "name": "policies",
+      "description": "Policy Requests"
+    }
+  ],
+  "schemes": ["http", "https"],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Login client by email",
+        "description": "Login client by email",
+        "operationId": "Login client",
+        "produces": ["application/xml", "application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "authentication",
+            "description": "user emailemail",
+            "schema": {
+              "type": "object",
+              "required": ["email"],
+              "properties": {
+                "email": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Client"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/clients/filter": {
+      "get": {
+        "tags": ["clients"],
+        "summary": "Finds client",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "operationId": "findClient",
+        "produces": ["application/xml", "application/json"],
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Id for the filter",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name for the filter",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Client"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/policies/filter": {
+      "get": {
+        "tags": ["policies"],
+        "summary": "Finds policy data",
+        "description": "List of policies linked to a user name, get user linked to a policy number",
+        "operationId": "findData",
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "produces": ["application/xml", "application/json"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name for the filter",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Policy id for the filter",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Policy"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Client": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Client"
+      }
+    },
+    "Policy": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "amountInsured": {
+          "type": "integer",
+          "format": "float"
+        },
+        "email": {
+          "type": "string"
+        },
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "installmentPayment": {
+          "type": "boolean"
+        },
+        "clientId": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Policy"
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
